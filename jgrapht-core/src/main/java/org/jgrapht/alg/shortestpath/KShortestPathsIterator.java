@@ -69,6 +69,11 @@ class KShortestPathsIterator<V, E>
     private PathValidator<V, E> pathValidator = null;
 
     /**
+     * Accumulated properties
+     */
+    private List<PathAccumulator<E>> pathAccumulatorList = new ArrayList<PathAccumulator<E>>();
+
+    /**
      * Start vertex.
      */
     private V startVertex;
@@ -88,7 +93,7 @@ class KShortestPathsIterator<V, E>
      */
     public KShortestPathsIterator(Graph<V, E> graph, V startVertex, V endVertex, int maxSize)
     {
-        this(graph, startVertex, endVertex, maxSize, null);
+        this(graph, startVertex, endVertex, maxSize, null, null);
     }
 
     /**
@@ -100,7 +105,7 @@ class KShortestPathsIterator<V, E>
      */
     public KShortestPathsIterator(
         Graph<V, E> graph, V startVertex, V endVertex, int maxSize,
-        PathValidator<V, E> pathValidator)
+        PathValidator<V, E> pathValidator, List<PathAccumulator<E>> paList)
     {
         assertKShortestPathsIterator(graph, startVertex);
 
@@ -115,6 +120,8 @@ class KShortestPathsIterator<V, E>
 
         this.prevImprovedVertices = new HashSet<>();
         this.pathValidator = pathValidator;
+
+        this.pathAccumulatorList = paList != null ? paList : this.pathAccumulatorList;
     }
 
     /**
@@ -230,7 +237,7 @@ class KShortestPathsIterator<V, E>
     private void encounterStartVertex()
     {
         RankingPathElementList<V, E> data = new RankingPathElementList<>(
-            this.graph, this.k, new RankingPathElement<>(this.startVertex), this.pathValidator);
+            this.graph, this.k, new RankingPathElement<>(this.startVertex, pathAccumulatorList), this.pathValidator);
 
         this.seenDataContainer.put(this.startVertex, data);
         this.prevSeenDataContainer.put(this.startVertex, data);

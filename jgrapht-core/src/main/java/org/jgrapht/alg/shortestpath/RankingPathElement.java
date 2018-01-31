@@ -34,6 +34,11 @@ final class RankingPathElement<V, E>
      */
     private double weight;
     
+    /**
+     * Accumulated properties
+     */
+    private List<PathAccumulator<E>> pathAccumulatorList = new ArrayList<PathAccumulator<E>>();
+
     private Graph<V, E> graph;
 
     /**
@@ -49,6 +54,11 @@ final class RankingPathElement<V, E>
         super(graph, pathElement, edge);
         this.weight = weight;
         this.graph = graph;
+
+        // clone accumulators from previous path and add value of the new edge to each accumulator
+        for ( PathAccumulator<E> paElement : pathElement.pathAccumulatorList) {
+           	this.pathAccumulatorList.add(paElement.copy().update(edge));
+        }
     }
 
     /**
@@ -56,10 +66,15 @@ final class RankingPathElement<V, E>
      *
      * @param vertex end vertex of the path element.
      */
-    RankingPathElement(V vertex)
+    RankingPathElement(V vertex, List<PathAccumulator<E>> paList)
     {
         super(vertex);
         this.weight = 0;
+
+        // create accumulators 
+        for ( PathAccumulator<E> paElement : paList) {
+           	this.pathAccumulatorList.add(paElement.copy());
+        }
     }
 
     /**
@@ -110,6 +125,11 @@ final class RankingPathElement<V, E>
         return super.createEdgeListPath();
     }
     
+    public List<PathAccumulator<E>> getPathAccumulatorList()
+    {
+        return pathAccumulatorList;
+    }
+
     
 }
 
