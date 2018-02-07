@@ -1,5 +1,5 @@
 /*
- * Copyright © 2017 AT&T, Inc. and others.  All rights reserved.
+ * Copyright © 2018 AT&T, Inc. and others.  All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
@@ -15,7 +15,7 @@ package org.jgrapht.alg.shortestpath;
  * As result of the validation the path might be dropped       
  * 
  * @author Masha Dorfman
- * @since January, 23, 2017
+ * @since January, 23, 2018
  *
  * @param <E> the graph edge type
  */
