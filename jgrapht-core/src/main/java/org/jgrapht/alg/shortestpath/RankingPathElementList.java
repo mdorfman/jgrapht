@@ -355,6 +355,15 @@ final class RankingPathElementList<V, E>
             }
         }
 
+        /**
+         * Check list of path accumulators
+         */
+        for ( PathAccumulator<E> paElement : prevPathElement.getPathAccumulatorList()) {
+           if (! paElement.isValid(edge)) {
+               return true;
+           }
+        }
+
         return false;
     }
 

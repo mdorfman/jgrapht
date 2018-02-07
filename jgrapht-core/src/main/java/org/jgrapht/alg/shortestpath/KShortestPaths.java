@@ -52,6 +52,8 @@ public class KShortestPaths<V, E>
 
     private PathValidator<V, E> pathValidator;
 
+    private List<PathAccumulator<E>> pathAccumulatorList = new ArrayList<PathAccumulator<E>>();
+
     /**
      * Constructs an object to compute ranking shortest paths in a graph.
      *
@@ -149,7 +151,8 @@ public class KShortestPaths<V, E>
         }
 
         KShortestPathsIterator<V, E> iter =
-            new KShortestPathsIterator<>(graph, startVertex, endVertex, nPaths, pathValidator);
+            new KShortestPathsIterator<>(graph, startVertex, endVertex, nPaths, pathValidator,
+                  pathAccumulatorList);
 
         // at the i-th pass the shortest paths with less (or equal) than i edges
         // are calculated.
@@ -173,5 +176,16 @@ public class KShortestPaths<V, E>
 
         return pathList;
     }
+
+    /**
+     * Set PathAccumulator class into List<PathAccumulator>
+     *
+     * @param   
+     */
+    public void setPathAccumulator(PathAccumulator<E> pa) {
+        Objects.requireNonNull(pa, "PathAccumulator is null");
+        pathAccumulatorList.add(pa);
+    }
+
 
 }
