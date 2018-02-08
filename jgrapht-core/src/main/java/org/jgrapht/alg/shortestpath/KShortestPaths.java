@@ -178,7 +178,7 @@ public class KShortestPaths<V, E>
     }
 
     /**
-     * Set PathAccumulator class into List<PathAccumulator>
+     * Set new PathAccumulator class into List of PathAccumulators
      *
      * @param pa - instance of path accumulator to be added to the list
      */

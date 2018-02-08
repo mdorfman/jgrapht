@@ -30,7 +30,7 @@ public abstract class AbstractPathAccumulator<E, M>
     protected M value;
 
     /**
-     * Value to compare the current value to. Not necessary Max/Min. E.g. M might be List<String>.
+     * Value to compare the current value to. Not necessary Max/Min. E.g. M might be List of Strings.
      */
     protected M limitValue;
 
