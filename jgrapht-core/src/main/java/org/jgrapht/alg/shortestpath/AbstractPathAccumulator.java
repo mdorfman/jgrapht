@@ -8,11 +8,12 @@
 package org.jgrapht.alg.shortestpath;
 
 /**
- * May be used to provide ability to accumulate information in path object.   
- * User can create multiple accumulators for different data types. 
- * RankingPathElement will accumulate each data type separately 
- * Optionally validation can be defined. Then the accumulated data will be checked for each new edge       
- * As result of the validation the path might be dropped       
+ * Abstract PathAccumulator class
+ *
+ * May be used to accumulate information in path object. User can create multiple accumulators for
+ * different data types. RankingPathElement will accumulate each data type separately. In validation
+ * the accumulated data will be checked for each new edge. As result of the validation the path
+ * might be dropped
  * 
  * @author Masha Dorfman
  * @since January, 23, 2018
@@ -20,19 +21,49 @@ package org.jgrapht.alg.shortestpath;
  * @param <E> the graph edge type
  * @param <M> the data type for user to implement
  */
-public abstract class AbstractPathAccumulator <E, M> implements PathAccumulator <E> {
-	protected M value;
-	protected M limitValue;
-	
-	public PathAccumulator<E> init(M value, M limitValue) {
+public abstract class AbstractPathAccumulator<E, M>
+    implements PathAccumulator<E>
+{
+    /**
+     * Current value.
+     */
+    protected M value;
+
+    /**
+     * Value to compare the current value to. Not necessary Max/Min. E.g. M might be List<String>.
+     */
+    protected M limitValue;
+
+    /**
+     * Method to assign initial values
+     * 
+     * @param value initial value to start accumulation
+     * @param limitValue value to compare the current value to.
+     * 
+     * @return new accumulator
+     */
+    public PathAccumulator<E> init(M value, M limitValue)
+    {
         this.value = value;
         this.limitValue = limitValue;
         return this;
-	}
+    }
 
-	public PathAccumulator<E> copy() {
-		return create().init(value, limitValue);
-	}
+    /**
+     * Method to copy the accumulator into a new instance. Is used on each new path as on each fork
+     * of path.
+     * 
+     * @return new accumulator
+     */
+    public PathAccumulator<E> copy()
+    {
+        return create().init(value, limitValue);
+    }
 
-	protected abstract AbstractPathAccumulator<E, M> create();
+    /**
+     * Method creates a copy of the Accumulator implementation Allows user application to use "new"
+     * 
+     * @return new accumulator
+     */
+    protected abstract AbstractPathAccumulator<E, M> create();
 }

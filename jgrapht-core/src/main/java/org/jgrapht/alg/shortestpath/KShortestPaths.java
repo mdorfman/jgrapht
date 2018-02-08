@@ -180,7 +180,7 @@ public class KShortestPaths<V, E>
     /**
      * Set PathAccumulator class into List<PathAccumulator>
      *
-     * @param   
+     * @param pa - instance of path accumulator to be added to the list
      */
     public void setPathAccumulator(PathAccumulator<E> pa) {
         Objects.requireNonNull(pa, "PathAccumulator is null");

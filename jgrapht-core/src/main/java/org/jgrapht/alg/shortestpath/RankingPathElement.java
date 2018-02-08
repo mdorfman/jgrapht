@@ -27,13 +27,13 @@ import org.jgrapht.*;
  * @since July 5, 2007
  */
 final class RankingPathElement<V, E>
-    extends AbstractPathElement<V, E> implements GraphPath<V, E>
+    extends AbstractPathElement<V, E> implements GraphPath<V, E> 
 {
     /**
      * Weight of the path.
      */
     private double weight;
-    
+
     /**
      * Accumulated properties
      */
@@ -45,8 +45,10 @@ final class RankingPathElement<V, E>
      * Creates a path element by concatenation of an edge to a path element.
      *
      * @param pathElement
-     * @param edge edge reaching the end vertex of the path element created.
-     * @param weight total cost of the created path element.
+     * @param edge
+     *            edge reaching the end vertex of the path element created.
+     * @param weight
+     *            total cost of the created path element.
      */
     RankingPathElement(
         Graph<V, E> graph, RankingPathElement<V, E> pathElement, E edge, double weight)
@@ -55,25 +57,31 @@ final class RankingPathElement<V, E>
         this.weight = weight;
         this.graph = graph;
 
-        // clone accumulators from previous path and add value of the new edge to each accumulator
-        for ( PathAccumulator<E> paElement : pathElement.pathAccumulatorList) {
-           	this.pathAccumulatorList.add(paElement.copy().update(edge));
+        // clone accumulators from previous path and add value of the new edge
+        // to each accumulator
+        for (PathAccumulator<E> paElement : pathElement.pathAccumulatorList) 
+        {
+            this.pathAccumulatorList.add(paElement.copy().update(edge));
         }
     }
 
     /**
      * Creates an empty path element.
      *
-     * @param vertex end vertex of the path element.
+     * @param vertex
+     *            end vertex of the path element.
+     * @param paList
+     *            list of path accumulators added by user application 
      */
     RankingPathElement(V vertex, List<PathAccumulator<E>> paList)
     {
         super(vertex);
         this.weight = 0;
 
-        // create accumulators 
-        for ( PathAccumulator<E> paElement : paList) {
-           	this.pathAccumulatorList.add(paElement.copy());
+        // create accumulators
+        for (PathAccumulator<E> paElement : paList) 
+        {
+            this.pathAccumulatorList.add(paElement.copy());
         }
     }
 
@@ -97,7 +105,7 @@ final class RankingPathElement<V, E>
     {
         return (RankingPathElement<V, E>) super.getPrevPathElement();
     }
-    
+
     @Override
     public Graph<V, E> getGraph()
     {
@@ -124,13 +132,11 @@ final class RankingPathElement<V, E>
     {
         return super.createEdgeListPath();
     }
-    
-    public List<PathAccumulator<E>> getPathAccumulatorList()
-    {
+
+    public List<PathAccumulator<E>> getPathAccumulatorList() {
         return pathAccumulatorList;
     }
 
-    
 }
 
 // End RankingPathElement.java
