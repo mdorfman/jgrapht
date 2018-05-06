@@ -1,11 +1,19 @@
 /*
- * Copyright © 2018 AT&T, Inc. and others.  All rights reserved.
+ * (C) Copyright 2007-2018, by France Telecom and Contributors.
  *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v1.0 which accompanies this distribution,
- * and is available at http://www.eclipse.org/legal/epl-v10.html
- * 
- * @author Masha Dorfman
+ * JGraphT : a free Java graph-theory library
+ *
+ * This program and the accompanying materials are dual-licensed under
+ * either
+ *
+ * (a) the terms of the GNU Lesser General Public License version 2.1
+ * as published by the Free Software Foundation, or (at your option) any
+ * later version.
+ *
+ * or (per the licensee's choosing)
+ *
+ * (b) the terms of the Eclipse Public License v1.0 as published by
+ * the Eclipse Foundation.
  */
 package org.jgrapht.alg.shortestpath;
 
@@ -17,6 +25,11 @@ import org.jgrapht.GraphPath;
 import org.jgrapht.graph.*;
 import org.junit.Test;
 
+/**
+ * .
+ *
+ * @author Masha Dorfman
+ */
 public class AccumulationOverPathTest {
 
     private static DefaultDirectedWeightedGraph<String, GraphEdge> wGraph;
